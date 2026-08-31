@@ -50,11 +50,11 @@ export default function Logo({ variant = "light", compact = false, showName = tr
         image
       )}
       {showName ? (
-        <span className={`min-w-0 leading-tight ${nameClass}`}>
-          <span className="block text-[10px] font-extrabold tracking-[0.04em] sm:text-[12px] lg:text-[13px]">
+        <span className={`hidden min-w-0 leading-tight min-[400px]:block ${nameClass}`}>
+          <span className="block truncate text-[10px] font-extrabold tracking-[0.04em] sm:text-[12px] lg:text-[13px]">
             {hospital.line1}
           </span>
-          <span className={`mt-0.5 block text-[8px] font-semibold tracking-[0.06em] sm:text-[10px] ${subClass}`}>
+          <span className={`mt-0.5 hidden truncate text-[8px] font-semibold tracking-[0.06em] min-[400px]:block sm:text-[10px] ${subClass}`}>
             {hospital.line2}
           </span>
         </span>

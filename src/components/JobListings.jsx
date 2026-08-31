@@ -60,7 +60,7 @@ export default function JobListings({ jobs, loading, error, onApply, onRetry }) 
           {!loading && !error && jobs.length > 0 && (
             <>
               <FadeIn delay={60} className="hidden md:block">
-                <div className="overflow-hidden rounded-xl bg-white shadow-[0_6px_24px_rgba(0,45,98,0.06)]">
+                <div className="overflow-x-auto rounded-xl bg-white shadow-[0_6px_24px_rgba(0,45,98,0.06)]">
                 <table className="w-full text-left text-sm">
                   <caption className="sr-only">Active job openings</caption>
                   <thead className="bg-navy text-white">
@@ -114,7 +114,7 @@ export default function JobListings({ jobs, loading, error, onApply, onRetry }) 
                     <FadeIn delay={index * 70}>
                       <article className="rounded-xl bg-white p-5 shadow-[0_6px_20px_rgba(0,45,98,0.06)]">
                         <h3 className="font-bold text-navy">{job.title}</h3>
-                        <dl className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                        <dl className="mt-3 grid grid-cols-1 gap-2 text-sm min-[360px]:grid-cols-2">
                           <div>
                             <dt className="text-muted">Department</dt>
                             <dd className="font-medium text-navy">{job.department}</dd>

@@ -45,7 +45,7 @@ export default function Facilities() {
             ))}
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid min-w-0 gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {facilitiesPage.extras.map((item, index) => (
               <FadeIn key={item.title} className="h-full" delay={index * 70}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(0,45,98,0.08)] transition-transform duration-300 hover:-translate-y-1.5">

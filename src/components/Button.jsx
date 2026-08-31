@@ -17,7 +17,7 @@ export default function Button({
   const Tag = as;
   return (
     <Tag
-      className={`inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-[13px] font-semibold uppercase tracking-wide no-underline transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`}
+      className={`inline-flex max-w-full items-center justify-center gap-2 rounded-md px-5 py-2.5 text-[13px] font-semibold uppercase tracking-wide no-underline transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`}
       {...props}
     >
       {children}

@@ -24,7 +24,7 @@ export default function Doctors() {
             <p className="max-w-3xl text-[15px] leading-relaxed text-body">{doctorsPage.intro}</p>
           </FadeIn>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid min-w-0 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {doctorsPage.departments.map((item, index) => (
               <FadeIn key={item.id} className="h-full" delay={Math.min(index, 6) * 70}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(0,45,98,0.08)] transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_rgba(0,45,98,0.12)]">

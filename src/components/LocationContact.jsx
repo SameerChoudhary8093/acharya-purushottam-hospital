@@ -9,7 +9,7 @@ export default function LocationContact() {
 
   return (
     <section className="bg-wash py-16 sm:py-24">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:items-stretch">
+      <div className="mx-auto grid max-w-7xl min-w-0 gap-8 px-4 sm:px-6 xl:grid-cols-3 xl:items-stretch">
         <FadeIn variant="right" className="h-full">
           <div id="location" className="scroll-mt-20 h-full rounded-xl bg-white p-6 sm:p-8">
             <p className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
@@ -43,7 +43,7 @@ export default function LocationContact() {
           <RevealImage
             src={images.exteriorSide}
             alt={images.alts.exteriorSide}
-            className="h-64 w-full rounded-xl lg:h-full"
+            className="h-64 w-full rounded-xl xl:h-full"
             imgClassName="h-full w-full object-cover"
           />
         </FadeIn>

@@ -19,7 +19,7 @@ export default function CareerCategories() {
 
   return (
     <section id="opportunities" className="scroll-mt-20 bg-white py-16 sm:py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl min-w-0 items-center gap-10 px-4 sm:px-6 xl:grid-cols-2 xl:gap-12">
         <div>
           <FadeIn variant="right">
             <h2 className="text-2xl font-extrabold uppercase tracking-wide text-navy sm:text-3xl">
@@ -29,7 +29,7 @@ export default function CareerCategories() {
               Find your opportunity and become part of our journey.
             </p>
           </FadeIn>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid min-w-0 gap-4 sm:grid-cols-2">
             {careerCategories.map((cat, index) => {
               const Icon = ICONS[cat.icon] || Briefcase;
               const selected = cat.id === activeId;
@@ -69,7 +69,7 @@ export default function CareerCategories() {
         </div>
 
         <FadeIn variant="left" delay={120} duration={900}>
-          <div className="relative h-[320px] overflow-hidden rounded-xl sm:h-[420px] lg:h-[520px]">
+          <div className="relative h-[240px] overflow-hidden rounded-xl sm:h-[360px] xl:h-[520px]">
             {careerCategories.map((cat) => (
               <img
                 key={cat.id}

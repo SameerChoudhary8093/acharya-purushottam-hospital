@@ -13,7 +13,7 @@ export default function RevealImage({
   return (
     <div
       ref={ref}
-      className={`reveal-item reveal-media overflow-hidden ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal-item reveal-media min-w-0 max-w-full overflow-hidden ${visible ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
     >
       <img src={src} alt={alt} className={imgClassName} loading={loading} />

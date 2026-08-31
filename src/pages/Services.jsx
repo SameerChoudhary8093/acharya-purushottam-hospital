@@ -49,7 +49,7 @@ export default function Services() {
 
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid min-w-0 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {servicesPage.items.map((item, index) => {
               const Icon = ICONS[item.id] || Stethoscope;
               return (

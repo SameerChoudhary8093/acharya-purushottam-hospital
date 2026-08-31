@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant split (@media (min-width: 1280px) and (min-aspect-ratio: 6/5));
+
 @theme {
   --color-navy: #002d62;
   --color-navy-hover: #003a7a;
@@ -13,7 +15,13 @@
 }
 
 :root {
-  --header-h: 68px;
+  --header-h: 64px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 68px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -24,6 +32,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -44,8 +53,20 @@ body {
   font-family: var(--font-sans);
   color: var(--color-body);
   background: #fff;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
 }
 
 :focus-visible {
@@ -146,6 +167,7 @@ body {
 
 .hero-zoom {
   animation: hero-zoom 28s ease-in-out alternate infinite;
+  transform-origin: center;
 }
 
 .hero-copy {

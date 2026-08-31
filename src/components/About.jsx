@@ -9,7 +9,7 @@ export default function About() {
 
   return (
     <section id="about" className="scroll-mt-20 bg-white py-16 sm:py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid max-w-7xl min-w-0 items-center gap-10 px-4 sm:px-6 xl:grid-cols-2 xl:gap-16">
         <FadeIn variant="right">
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
             {about.label}

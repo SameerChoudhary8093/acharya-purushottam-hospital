@@ -2,8 +2,8 @@ import useInView from "../hooks/useInView";
 
 const VARIANTS = {
   up: "translate-y-10",
-  left: "translate-x-10",
-  right: "-translate-x-10",
+  left: "translate-x-6",
+  right: "-translate-x-6",
   zoom: "scale-[0.96]",
 };
 
@@ -20,7 +20,7 @@ export default function FadeIn({
   return (
     <div
       ref={ref}
-      className={`reveal-item transition-[opacity,transform] ease-[cubic-bezier(0.215,0.61,0.355,1)] ${
+      className={`reveal-item min-w-0 transition-[opacity,transform] ease-[cubic-bezier(0.215,0.61,0.355,1)] ${
         visible ? "is-visible translate-x-0 translate-y-0 scale-100 opacity-100" : `opacity-0 ${hiddenMove}`
       } ${className}`}
       style={{

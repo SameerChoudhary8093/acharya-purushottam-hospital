@@ -57,7 +57,7 @@ export default function Highlights() {
 
   return (
     <section id="highlights" className="scroll-mt-20 overflow-hidden bg-white py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl min-w-0 px-4 sm:px-6">
         <FadeIn>
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
             {highlights.label}
@@ -68,7 +68,7 @@ export default function Highlights() {
           <p className="mt-3 max-w-2xl text-[15px] text-body">{highlights.text}</p>
         </FadeIn>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-12">
+        <div className="mt-10 grid min-w-0 gap-4 md:grid-cols-12">
           {highlights.stories.map((story, index) => (
             <FadeIn
               key={story.id}

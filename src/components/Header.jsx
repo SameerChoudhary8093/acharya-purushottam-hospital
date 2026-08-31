@@ -58,7 +58,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-white/95 backdrop-blur-md ${
+      className={`sticky top-0 z-50 w-full min-w-0 overflow-x-clip border-b bg-white/95 backdrop-blur-md ${
         scrolled ? "border-slate-200 shadow-sm" : "border-slate-100"
       }`}
     >
@@ -68,8 +68,8 @@ export default function Header() {
       >
         Skip to content
       </a>
-      <div className="relative flex h-[68px] items-center justify-between px-4 sm:px-6 lg:h-[72px] lg:px-8">
-        <div className="min-w-0">
+      <div className="relative flex h-[64px] w-full min-w-0 items-center justify-between gap-2 px-4 sm:h-[68px] sm:px-5 lg:h-[72px] lg:px-8">
+        <div className="min-w-0 flex-1 overflow-hidden">
           <Logo compact showName />
         </div>
 
@@ -99,11 +99,11 @@ export default function Header() {
           )}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <Button
             type="button"
             onClick={() => goHomeSection("apply")}
-            className="shrink-0 px-3 py-1.5 text-[11px] sm:px-4 sm:py-2 sm:text-[12px]"
+            className="shrink-0 px-2.5 py-1.5 text-[11px] sm:px-4 sm:py-2 sm:text-[12px]"
           >
             <span className="sm:hidden">Apply</span>
             <span className="max-sm:hidden">Apply Now</span>
@@ -124,7 +124,7 @@ export default function Header() {
       {open && (
         <div
           id="mobile-nav"
-          className="border-t border-slate-100 bg-white px-4 py-4 xl:hidden"
+          className="border-t border-slate-100 bg-white px-3 py-4 sm:px-5 xl:hidden"
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV.map((item) =>

@@ -66,7 +66,7 @@ export default function Footer() {
   return (
     <footer className="bg-navy-dark text-white">
       <FadeIn>
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl min-w-0 gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 xl:grid-cols-4">
         <div className="lg:col-span-1">
           <Logo variant="dark" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">

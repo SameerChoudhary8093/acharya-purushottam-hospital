@@ -96,7 +96,7 @@ export default function WhyJoinUs() {
         hovered.current = false;
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl min-w-0 px-4 sm:px-6">
         <FadeIn>
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>

@@ -16,7 +16,7 @@ export default function Layout() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div id="top">
+    <div id="top" className="min-w-0 overflow-x-clip">
       <Header />
       <Outlet />
       <Footer />

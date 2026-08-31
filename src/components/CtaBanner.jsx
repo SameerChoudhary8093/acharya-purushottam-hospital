@@ -7,7 +7,7 @@ export default function CtaBanner() {
   return (
     <section className="ecg-line bg-navy" aria-labelledby="cta-heading">
       <FadeIn>
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-center">
+        <div className="mx-auto flex max-w-7xl min-w-0 flex-col items-start justify-between gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-center">
           <div className="flex items-start gap-4 text-white md:items-center">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/30">
               <UserPlus size={22} aria-hidden="true" />
