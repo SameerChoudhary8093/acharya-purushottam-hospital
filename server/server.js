@@ -1,8 +1,13 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express from "express";
+import dotenv from "dotenv";
 import app from "./app.js";
 import { isSupabaseConfigured } from "./services/supabase.js";
+
+if (!process.env.VERCEL) {
+  dotenv.config();
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 5000;
@@ -20,6 +25,6 @@ if (!isVercel && isProduction) {
 if (!isVercel) {
   app.listen(PORT, () => {
     console.log(`API listening on http://localhost:${PORT}`);
-    console.log(`Supabase configured: ${isSupabaseConfigured}`);
+    console.log(`Supabase configured: ${isSupabaseConfigured()}`);
   });
 }

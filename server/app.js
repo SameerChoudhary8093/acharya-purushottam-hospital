@@ -1,11 +1,15 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { errorHandler } from "./middleware/errorHandler.js";
 import applicationsRouter from "./routes/applications.js";
 import jobsRouter from "./routes/jobs.js";
-import { isSupabaseConfigured } from "./services/supabase.js";
+import { getSupabaseStatus, isSupabaseConfigured } from "./services/supabase.js";
+
+if (!process.env.VERCEL) {
+  dotenv.config();
+}
 
 const app = express();
 app.set("trust proxy", 1);
@@ -65,7 +69,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/api/health", (_req, res) => {
   res.json({
     ok: true,
-    supabase: isSupabaseConfigured,
+    supabase: isSupabaseConfigured(),
+    ...getSupabaseStatus(),
   });
 });
 

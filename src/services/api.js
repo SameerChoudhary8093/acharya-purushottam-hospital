@@ -23,16 +23,19 @@ async function parseJson(response) {
 }
 
 export async function getJobs() {
-  const response = await fetch(`${API_BASE}/api/jobs`, { cache: "no-store" });
-  const data = await parseJson(response);
+  try {
+    const response = await fetch(`${API_BASE}/api/jobs`, { cache: "no-store" });
+    const data = await parseJson(response);
 
-  if (!response.ok) {
-    const error = new Error(data.message || "Unable to load open positions.");
-    error.status = response.status;
-    throw error;
+    if (response.ok && Array.isArray(data.jobs)) {
+      return data.jobs;
+    }
+  } catch {
+    // Live API/env is unavailable; show bundled openings instead.
   }
 
-  return data.jobs || [];
+  const { FALLBACK_JOBS } = await import("../config/fallbackJobs");
+  return FALLBACK_JOBS;
 }
 
 export async function getJob(id) {

@@ -1,5 +1,8 @@
-import "dotenv/config";
 import { createClient } from "@supabase/supabase-js";
+
+function env(name) {
+  return String(process.env[name] || "").trim();
+}
 
 function normalizeSupabaseUrl(raw) {
   const value = (raw || "").trim();
@@ -19,51 +22,78 @@ function normalizeSupabaseUrl(raw) {
   }
 }
 
-const rawUrl = process.env.SUPABASE_URL || "";
-const secretKey = (process.env.SUPABASE_SECRET_KEY || "").trim();
-const publishableKey = (process.env.SUPABASE_PUBLISHABLE_KEY || "").trim();
-const url = normalizeSupabaseUrl(rawUrl);
+let cached = null;
 
-export const isSupabaseConfigured = Boolean(url && secretKey);
-
-console.log("[Supabase Config]");
-console.log("URL present:", Boolean(rawUrl.trim()));
-console.log("Publishable key present:", Boolean(publishableKey));
-console.log("Secret key present:", Boolean(secretKey));
-console.log("URL normalized:", Boolean(url));
-console.log("Client will initialize:", isSupabaseConfigured);
-
-if (!isSupabaseConfigured) {
-  console.warn(
-    "Supabase is not fully configured. SUPABASE_URL should look like https://<project-ref>.supabase.co (the /rest/v1 path is optional and will be stripped).",
-  );
+function getConfig() {
+  const rawUrl = env("SUPABASE_URL");
+  const secretKey = env("SUPABASE_SECRET_KEY");
+  const publishableKey = env("SUPABASE_PUBLISHABLE_KEY");
+  const url = normalizeSupabaseUrl(rawUrl);
+  const configured = Boolean(url && secretKey);
+  return { rawUrl, secretKey, publishableKey, url, configured };
 }
 
-function secretFetch(input, init) {
-  const headers = new Headers(init?.headers);
-  headers.set("apikey", secretKey);
-  const authorization = headers.get("Authorization") || "";
-  if (
-    authorization.startsWith("Bearer sb_secret_") ||
-    authorization.startsWith("Bearer sb_publishable_")
-  ) {
-    headers.delete("Authorization");
+export function getSupabaseStatus() {
+  const { rawUrl, secretKey, url, configured } = getConfig();
+  return {
+    configured,
+    hasUrl: Boolean(rawUrl),
+    hasSecret: Boolean(secretKey),
+    urlOk: Boolean(url),
+  };
+}
+
+export function isSupabaseConfigured() {
+  return getConfig().configured;
+}
+
+function createSupabase() {
+  const { url, secretKey, configured } = getConfig();
+  if (!configured) return null;
+
+  function secretFetch(input, init) {
+    const headers = new Headers(init?.headers);
+    headers.set("apikey", secretKey);
+    const authorization = headers.get("Authorization") || "";
+    if (
+      authorization.startsWith("Bearer sb_secret_") ||
+      authorization.startsWith("Bearer sb_publishable_")
+    ) {
+      headers.delete("Authorization");
+    }
+    return fetch(input, { ...init, headers });
   }
-  return fetch(input, { ...init, headers });
-}
 
-export const supabase = isSupabaseConfigured
-  ? createClient(url, secretKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-      global: { fetch: secretFetch },
-    })
-  : null;
+  return createClient(url, secretKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: secretFetch },
+  });
+}
 
 export function requireSupabase() {
-  if (!supabase) {
+  const { configured } = getConfig();
+  if (!configured) {
     const error = new Error("SUPABASE_NOT_CONFIGURED");
     error.status = 503;
     throw error;
   }
-  return supabase;
+  if (!cached) cached = createSupabase();
+  if (!cached) {
+    const error = new Error("SUPABASE_NOT_CONFIGURED");
+    error.status = 503;
+    throw error;
+  }
+  return cached;
+}
+
+if (!process.env.VERCEL) {
+  const { configured, rawUrl } = getConfig();
+  console.log("[Supabase Config]");
+  console.log("URL present:", Boolean(rawUrl));
+  console.log("Client will initialize:", configured);
+  if (!configured) {
+    console.warn(
+      "Supabase is not fully configured. SUPABASE_URL should look like https://<project-ref>.supabase.co",
+    );
+  }
 }

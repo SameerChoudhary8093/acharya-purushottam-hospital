@@ -83,6 +83,15 @@ alter table public.applications enable row level security;
 revoke all on public.jobs from anon, authenticated;
 revoke all on public.applications from anon, authenticated;
 
+grant select on public.jobs to anon, authenticated;
+
+drop policy if exists "Public can read active jobs" on public.jobs;
+create policy "Public can read active jobs"
+on public.jobs
+for select
+to anon, authenticated
+using (is_active = true);
+
 insert into storage.buckets (id, name, public)
 values ('resumes', 'resumes', false)
 on conflict (id) do update set public = false;

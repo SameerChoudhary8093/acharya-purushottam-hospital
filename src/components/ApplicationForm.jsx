@@ -139,7 +139,9 @@ export default function ApplicationForm({ jobs, selectedJob, onConsumedSelection
     formData.append("date_of_birth", values.dateOfBirth);
     formData.append("gender", values.gender);
     formData.append("applying_for", values.applyingFor);
-    if (values.jobId) formData.append("job_id", values.jobId);
+    if (values.jobId && !String(values.jobId).startsWith("fallback-")) {
+      formData.append("job_id", values.jobId);
+    }
     formData.append("department", values.department);
     formData.append("qualification", values.qualification.trim());
     formData.append("specialization", values.specialization.trim());
