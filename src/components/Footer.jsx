@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import siteContent from "../config/siteContent";
 import Logo from "./Logo";
+import FadeIn from "./FadeIn";
 import { scrollToId } from "../utils/scroll";
 
 function FacebookIcon() {
@@ -64,6 +65,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy-dark text-white">
+      <FadeIn>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <Logo variant="dark" />
@@ -149,6 +151,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </FadeIn>
       <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-white/55 sm:px-6">
         {footer.copyright}
       </div>

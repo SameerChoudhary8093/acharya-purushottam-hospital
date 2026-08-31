@@ -1,40 +1,32 @@
-import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "../utils/scroll";
+import useInView from "../hooks/useInView";
 
-export default function FadeIn({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+const VARIANTS = {
+  up: "translate-y-10",
+  left: "translate-x-10",
+  right: "-translate-x-10",
+  zoom: "scale-[0.96]",
+};
 
-  useEffect(() => {
-    if (prefersReducedMotion()) {
-      setVisible(true);
-      return undefined;
-    }
-
-    const node = ref.current;
-    if (!node) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+export default function FadeIn({
+  children,
+  className = "",
+  delay = 0,
+  variant = "up",
+  duration = 800,
+}) {
+  const [ref, visible] = useInView();
+  const hiddenMove = VARIANTS[variant] || VARIANTS.up;
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      className={`reveal-item transition-[opacity,transform] ease-[cubic-bezier(0.215,0.61,0.355,1)] ${
+        visible ? "is-visible translate-x-0 translate-y-0 scale-100 opacity-100" : `opacity-0 ${hiddenMove}`
       } ${className}`}
-      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
+      style={{
+        transitionDuration: `${duration}ms`,
+        transitionDelay: visible ? `${delay}ms` : "0ms",
+      }}
     >
       {children}
     </div>

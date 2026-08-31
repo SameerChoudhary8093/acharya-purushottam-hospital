@@ -6,7 +6,7 @@ import { scrollToId } from "../utils/scroll";
 
 export default function JobListings({ jobs, loading, error, onApply, onRetry }) {
   return (
-    <section id="positions" className="scroll-mt-28 bg-wash py-16 sm:py-24">
+    <section id="positions" className="scroll-mt-20 bg-wash py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <FadeIn>
           <h2 className="text-2xl font-extrabold uppercase tracking-wide text-navy sm:text-3xl">
@@ -59,7 +59,8 @@ export default function JobListings({ jobs, loading, error, onApply, onRetry }) 
 
           {!loading && !error && jobs.length > 0 && (
             <>
-              <div className="hidden overflow-hidden rounded-xl bg-white shadow-[0_6px_24px_rgba(0,45,98,0.06)] md:block">
+              <FadeIn delay={60} className="hidden md:block">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_6px_24px_rgba(0,45,98,0.06)]">
                 <table className="w-full text-left text-sm">
                   <caption className="sr-only">Active job openings</caption>
                   <thead className="bg-navy text-white">
@@ -104,38 +105,40 @@ export default function JobListings({ jobs, loading, error, onApply, onRetry }) 
                     ))}
                   </tbody>
                 </table>
-              </div>
+                </div>
+              </FadeIn>
 
               <ul className="grid gap-4 md:hidden">
-                {jobs.map((job) => (
-                  <li
-                    key={job.id}
-                    className="rounded-xl bg-white p-5 shadow-[0_6px_20px_rgba(0,45,98,0.06)]"
-                  >
-                    <h3 className="font-bold text-navy">{job.title}</h3>
-                    <dl className="mt-3 grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <dt className="text-muted">Department</dt>
-                        <dd className="font-medium text-navy">{job.department}</dd>
-                      </div>
-                      <div>
-                        <dt className="text-muted">Experience</dt>
-                        <dd className="font-medium text-navy">
-                          {formatExperience(job.experience_min, job.experience_max)}
-                        </dd>
-                      </div>
-                      <div className="col-span-2">
-                        <dt className="text-muted">Location</dt>
-                        <dd className="font-medium text-navy">{job.location || "Jaipur"}</dd>
-                      </div>
-                    </dl>
-                    <Button
-                      type="button"
-                      className="mt-4 w-full"
-                      onClick={() => onApply(job)}
-                    >
-                      Apply
-                    </Button>
+                {jobs.map((job, index) => (
+                  <li key={job.id}>
+                    <FadeIn delay={index * 70}>
+                      <article className="rounded-xl bg-white p-5 shadow-[0_6px_20px_rgba(0,45,98,0.06)]">
+                        <h3 className="font-bold text-navy">{job.title}</h3>
+                        <dl className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <dt className="text-muted">Department</dt>
+                            <dd className="font-medium text-navy">{job.department}</dd>
+                          </div>
+                          <div>
+                            <dt className="text-muted">Experience</dt>
+                            <dd className="font-medium text-navy">
+                              {formatExperience(job.experience_min, job.experience_max)}
+                            </dd>
+                          </div>
+                          <div className="col-span-2">
+                            <dt className="text-muted">Location</dt>
+                            <dd className="font-medium text-navy">{job.location || "Jaipur"}</dd>
+                          </div>
+                        </dl>
+                        <Button
+                          type="button"
+                          className="mt-4 w-full"
+                          onClick={() => onApply(job)}
+                        >
+                          Apply
+                        </Button>
+                      </article>
+                    </FadeIn>
                   </li>
                 ))}
               </ul>

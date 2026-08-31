@@ -12,6 +12,16 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  --header-h: 68px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 72px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -160,6 +170,28 @@ body {
 
 .hero-visual-in {
   animation: hero-image-in 1s ease-out both;
+}
+
+.reveal-media img {
+  transform: scale(1.12);
+  transition: transform 1.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
+}
+
+.reveal-item.is-visible .reveal-media img,
+.reveal-media.is-visible img {
+  transform: scale(1);
+}
+
+.group:hover .reveal-media img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-media img {
+    transform: none;
+    will-change: auto;
+  }
 }
 
 .scroll-cue {

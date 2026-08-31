@@ -172,7 +172,7 @@ export default function ApplicationForm({ jobs, selectedJob, onConsumedSelection
   const applyingValue = values.jobId || (values.applyingFor === "General Application" ? "general" : "");
 
   return (
-    <section id="apply" className="scroll-mt-28 bg-white py-16 sm:py-24">
+    <section id="apply" className="scroll-mt-20 bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <FadeIn>
           <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-navy sm:text-3xl">

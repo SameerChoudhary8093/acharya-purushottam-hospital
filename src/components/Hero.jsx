@@ -15,6 +15,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero"
       className="relative isolate overflow-hidden bg-white"
       aria-labelledby="hero-heading"
     >
@@ -27,14 +28,14 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative flex flex-col lg:min-h-[700px] lg:flex-row xl:min-h-[740px]">
-        <div className="relative z-10 flex w-full flex-col justify-center px-4 py-10 sm:px-6 sm:py-12 lg:w-[42%] lg:px-8 lg:py-14 xl:w-[40%] xl:pl-12 xl:pr-6">
+      <div className="relative flex min-h-[calc(100svh-var(--header-h))] min-w-0 flex-col-reverse lg:flex-row">
+        <div className="relative z-10 flex w-full min-w-0 flex-col justify-center px-4 py-8 sm:px-6 lg:w-[46%] lg:px-7 lg:py-8 xl:w-[44%] xl:pl-10 xl:pr-5 min-[1440px]:w-[42%] min-[1440px]:pl-12">
           <p className="hero-copy text-[13px] font-semibold uppercase tracking-[0.22em] text-accent sm:text-[14px]">
             {hero.label}
           </p>
           <h1
             id="hero-heading"
-            className="hero-copy hero-copy-delay-1 mt-4 text-[2rem] font-extrabold leading-[1.12] tracking-tight text-navy sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4rem]"
+            className="hero-copy hero-copy-delay-1 mt-3 text-[2.15rem] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[2.85rem] lg:text-[3.35rem] xl:text-[3.9rem] min-[1440px]:text-[4.35rem] min-[1600px]:text-[4.6rem]"
           >
             {hero.headingLines.map((line) => (
               <span key={line} className="block">
@@ -42,11 +43,11 @@ export default function Hero() {
               </span>
             ))}
           </h1>
-          <p className="hero-copy hero-copy-delay-2 mt-5 max-w-xl text-[15px] leading-relaxed text-body sm:text-base">
+          <p className="hero-copy hero-copy-delay-2 mt-4 max-w-xl text-[15px] leading-relaxed text-pretty text-body sm:text-[16px] lg:text-[17px]">
             {hero.text}
           </p>
 
-          <ul className="hero-copy hero-copy-delay-3 mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          <ul className="hero-copy hero-copy-delay-3 mt-6 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
             {hero.features.map((feature) => {
               const Icon = FEATURE_ICONS[feature.icon] || Building2;
               return (
@@ -64,11 +65,11 @@ export default function Hero() {
             })}
           </ul>
 
-          <div className="hero-copy hero-copy-delay-4 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="hero-copy hero-copy-delay-4 mt-6 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
             <Button
               type="button"
               variant="primary"
-              className="rounded-md px-6 py-3 text-[12px] tracking-[0.08em] shadow-[0_8px_20px_rgba(0,45,98,0.18)] hover:shadow-[0_10px_24px_rgba(0,45,98,0.22)]"
+              className="w-full rounded-md px-6 py-3 text-[12px] tracking-[0.08em] shadow-[0_8px_20px_rgba(0,45,98,0.18)] hover:shadow-[0_10px_24px_rgba(0,45,98,0.22)] sm:w-auto"
               onClick={() => scrollToId("positions")}
             >
               Explore Opportunities
@@ -77,7 +78,7 @@ export default function Hero() {
             <Button
               type="button"
               variant="secondary"
-              className="rounded-md border-navy px-6 py-3 text-[12px] tracking-[0.08em] hover:border-accent hover:text-navy"
+              className="w-full rounded-md border-navy px-6 py-3 text-[12px] tracking-[0.08em] hover:border-accent hover:text-navy sm:w-auto"
               onClick={() => scrollToId("apply")}
             >
               Join Our Team
@@ -85,14 +86,18 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-visual-in relative h-[280px] w-full overflow-hidden sm:h-[380px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[58%] xl:w-[60%]">
+        <div className="hero-visual-in relative h-[300px] w-full overflow-hidden sm:h-[380px] md:h-[420px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[54%] xl:w-[56%] min-[1440px]:w-[58%]">
           <img
             src={images.hero}
             alt={images.alts.hero}
-            className="hero-zoom h-full w-full object-cover object-[center_42%] lg:object-[center_center]"
+            className="hero-zoom h-full w-full object-cover object-[center_40%] lg:object-[58%_center]"
           />
           <div
-            className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/70 to-transparent sm:w-24 lg:w-40 xl:w-52"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent lg:hidden"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-white via-white/75 to-transparent sm:w-24 lg:block lg:w-36 xl:w-48"
             aria-hidden="true"
           />
         </div>

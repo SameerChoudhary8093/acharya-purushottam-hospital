@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import siteContent from "../config/siteContent";
 import Button from "./Button";
 import FadeIn from "./FadeIn";
+import RevealImage from "./RevealImage";
 
 export default function LocationContact() {
   const { contact, images } = siteContent;
@@ -9,8 +10,8 @@ export default function LocationContact() {
   return (
     <section className="bg-wash py-16 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:items-stretch">
-        <FadeIn>
-          <div id="location" className="scroll-mt-28 h-full rounded-xl bg-white p-6 sm:p-8">
+        <FadeIn variant="right" className="h-full">
+          <div id="location" className="scroll-mt-20 h-full rounded-xl bg-white p-6 sm:p-8">
             <p className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
               <MapPin size={14} aria-hidden="true" />
               Our Location
@@ -38,17 +39,17 @@ export default function LocationContact() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={60}>
-          <img
+        <FadeIn delay={80} duration={900} className="h-full">
+          <RevealImage
             src={images.exteriorSide}
             alt={images.alts.exteriorSide}
-            className="h-64 w-full rounded-xl object-cover lg:h-full"
-            loading="lazy"
+            className="h-64 w-full rounded-xl lg:h-full"
+            imgClassName="h-full w-full object-cover"
           />
         </FadeIn>
 
-        <FadeIn delay={100}>
-          <div id="contact" className="scroll-mt-28 h-full rounded-xl bg-white p-6 sm:p-8">
+        <FadeIn variant="left" delay={140} className="h-full">
+          <div id="contact" className="scroll-mt-20 h-full rounded-xl bg-white p-6 sm:p-8">
             <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
               Contact Us
             </p>

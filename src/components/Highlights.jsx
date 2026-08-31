@@ -21,15 +21,15 @@ function StoryCard({ story, index }) {
 
   if (story.kind === "photo") {
     return (
-      <article
-        className={`${spanClass(story.span)} group relative overflow-hidden rounded-3xl shadow-[0_10px_30px_rgba(0,45,98,0.08)] transition-transform duration-500 hover:-translate-y-1.5`}
-      >
-        <img
-          src={images[story.image]}
-          alt={images.alts[story.image] || story.title}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-        />
+      <article className="group relative h-full min-h-[210px] overflow-hidden rounded-3xl shadow-[0_10px_30px_rgba(0,45,98,0.08)] transition-transform duration-500 hover:-translate-y-1.5">
+        <div className="reveal-media absolute inset-0">
+          <img
+            src={images[story.image]}
+            alt={images.alts[story.image] || story.title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-6">
           <h3 className="text-lg font-bold text-white">{story.title}</h3>
@@ -41,7 +41,7 @@ function StoryCard({ story, index }) {
 
   return (
     <article
-      className={`${spanClass(story.span)} ${floatClass} flex flex-col justify-between rounded-3xl p-7 shadow-[0_10px_30px_rgba(0,45,98,0.08)] transition-transform duration-500 hover:-translate-y-1.5 ${TONE[story.tone] || TONE.soft}`}
+      className={`${floatClass} flex h-full min-h-[210px] flex-col justify-between rounded-3xl p-7 shadow-[0_10px_30px_rgba(0,45,98,0.08)] transition-transform duration-500 hover:-translate-y-1.5 ${TONE[story.tone] || TONE.soft}`}
     >
       <p className="text-lg font-semibold leading-snug sm:text-xl">
         {story.kind === "quote" ? `“${story.text}”` : story.text}
@@ -56,7 +56,7 @@ export default function Highlights() {
   const marquee = [...highlights.marquee, ...highlights.marquee];
 
   return (
-    <section id="highlights" className="scroll-mt-28 overflow-hidden bg-white py-16 sm:py-24">
+    <section id="highlights" className="scroll-mt-20 overflow-hidden bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <FadeIn>
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
@@ -70,11 +70,19 @@ export default function Highlights() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-12">
           {highlights.stories.map((story, index) => (
-            <StoryCard key={story.id} story={story} index={index} />
+            <FadeIn
+              key={story.id}
+              className={spanClass(story.span)}
+              delay={Math.min(index, 5) * 80}
+              duration={800}
+            >
+              <StoryCard story={story} index={index} />
+            </FadeIn>
           ))}
         </div>
       </div>
 
+      <FadeIn delay={160}>
       <div className="relative mt-14">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-24" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-24" />
@@ -96,6 +104,7 @@ export default function Highlights() {
           </ul>
         </div>
       </div>
+      </FadeIn>
     </section>
   );
 }

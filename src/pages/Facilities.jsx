@@ -1,8 +1,9 @@
-import { ArrowRight, Building2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import siteContent from "../config/siteContent";
 import PageHero from "../components/PageHero";
 import FadeIn from "../components/FadeIn";
+import RevealImage from "../components/RevealImage";
 import Button from "../components/Button";
 
 export default function Facilities() {
@@ -14,23 +15,26 @@ export default function Facilities() {
         label={facilitiesPage.label}
         title={facilitiesPage.heading}
         text={facilitiesPage.text}
-        image={images.aerialWide}
-        imageAlt={images.alts.aerialWide}
+        image={images.pageHeroFacilities}
+        imageAlt={images.alts.pageHeroFacilities}
       />
 
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-8">
             {facilitiesPage.items.map((item, index) => (
-              <FadeIn key={item.id} delay={index * 50}>
+              <FadeIn
+                key={item.id}
+                delay={index * 70}
+                variant={index % 2 === 1 ? "left" : "right"}
+                duration={850}
+              >
                 <article className="grid overflow-hidden rounded-2xl bg-wash shadow-[0_8px_24px_rgba(0,45,98,0.06)] md:grid-cols-2">
-                  <img
+                  <RevealImage
                     src={images[item.image]}
                     alt={images.alts[item.image] || item.title}
-                    className={`h-56 w-full object-cover md:h-full ${
-                      index % 2 === 1 ? "md:order-2" : ""
-                    }`}
-                    loading="lazy"
+                    className={`h-56 w-full md:h-full ${index % 2 === 1 ? "md:order-2" : ""}`}
+                    imgClassName="h-full w-full object-cover"
                   />
                   <div className="flex flex-col justify-center p-6 sm:p-10">
                     <h2 className="text-2xl font-extrabold text-navy">{item.title}</h2>
@@ -43,11 +47,20 @@ export default function Facilities() {
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {facilitiesPage.extras.map((item, index) => (
-              <FadeIn key={item.title} delay={index * 40}>
-                <article className="h-full rounded-2xl border border-slate-100 bg-white p-6 transition-transform duration-300 hover:-translate-y-1.5">
-                  <Building2 className="text-navy" size={22} aria-hidden="true" />
-                  <h3 className="mt-4 font-bold text-navy">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-body">{item.text}</p>
+              <FadeIn key={item.title} className="h-full" delay={index * 70}>
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(0,45,98,0.08)] transition-transform duration-300 hover:-translate-y-1.5">
+                  <div className="reveal-media h-40 overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-bold text-navy">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-body">{item.text}</p>
+                  </div>
                 </article>
               </FadeIn>
             ))}

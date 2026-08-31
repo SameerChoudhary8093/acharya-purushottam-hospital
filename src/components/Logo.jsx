@@ -1,10 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import siteContent from "../config/siteContent";
+import { prefersReducedMotion } from "../utils/scroll";
 
 export default function Logo({ variant = "light", compact = false, showName = true }) {
   const { hospital } = siteContent;
+  const location = useLocation();
+  const navigate = useNavigate();
   const nameClass = variant === "dark" ? "text-white" : "text-navy";
   const subClass = variant === "dark" ? "text-white/80" : "text-accent";
+
+  function goToHero(event) {
+    event.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/");
+      return;
+    }
+    if (location.hash) {
+      navigate("/");
+    }
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
+  }
 
   const image = (
     <img
@@ -12,7 +31,7 @@ export default function Logo({ variant = "light", compact = false, showName = tr
       alt=""
       className={`w-auto shrink-0 object-contain ${
         compact
-          ? "h-[4.5rem] max-h-[4.5rem] max-w-[4.75rem] sm:h-[5.25rem] sm:max-h-[5.25rem] sm:max-w-[5.5rem] lg:h-[6rem] lg:max-h-[6rem] lg:max-w-[6.25rem]"
+          ? "h-10 max-h-10 max-w-[2.75rem] sm:h-11 sm:max-h-11 sm:max-w-12 lg:h-12 lg:max-h-12 lg:max-w-[3.25rem]"
           : "h-[4.75rem] max-h-[4.75rem] max-w-[5rem] sm:h-20 sm:max-h-20 sm:max-w-[6rem]"
       }`}
     />
@@ -21,8 +40,9 @@ export default function Logo({ variant = "light", compact = false, showName = tr
   return (
     <Link
       to="/"
+      onClick={goToHero}
       className="flex min-w-0 max-w-full items-center gap-2.5 no-underline sm:gap-3"
-      aria-label="Acharya Purushottam Hospital & Medical College"
+      aria-label="Acharya Purushottam Hospital & Medical College — back to home"
     >
       {variant === "dark" ? (
         <span className="inline-flex shrink-0 rounded-md bg-white px-1 py-1">{image}</span>
@@ -31,10 +51,10 @@ export default function Logo({ variant = "light", compact = false, showName = tr
       )}
       {showName ? (
         <span className={`min-w-0 leading-tight ${nameClass}`}>
-          <span className="block text-[11px] font-extrabold tracking-[0.04em] sm:text-[13px] lg:text-[15px]">
+          <span className="block text-[10px] font-extrabold tracking-[0.04em] sm:text-[12px] lg:text-[13px]">
             {hospital.line1}
           </span>
-          <span className={`mt-0.5 block text-[9px] font-semibold tracking-[0.06em] sm:text-[11px] ${subClass}`}>
+          <span className={`mt-0.5 block text-[8px] font-semibold tracking-[0.06em] sm:text-[10px] ${subClass}`}>
             {hospital.line2}
           </span>
         </span>

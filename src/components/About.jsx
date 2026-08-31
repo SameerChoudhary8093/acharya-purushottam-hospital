@@ -1,15 +1,16 @@
 import siteContent from "../config/siteContent";
 import Button from "./Button";
 import FadeIn from "./FadeIn";
+import RevealImage from "./RevealImage";
 import { scrollToId } from "../utils/scroll";
 
 export default function About() {
   const { about, images } = siteContent;
 
   return (
-    <section id="about" className="scroll-mt-28 bg-white py-16 sm:py-24">
+    <section id="about" className="scroll-mt-20 bg-white py-16 sm:py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
-        <FadeIn>
+        <FadeIn variant="right">
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
             {about.label}
           </p>
@@ -31,12 +32,12 @@ export default function About() {
           </Button>
         </FadeIn>
 
-        <FadeIn delay={80}>
-          <img
+        <FadeIn variant="left" delay={120} duration={900}>
+          <RevealImage
             src={images.lobby}
             alt={images.alts.lobby}
-            className="h-[280px] w-full rounded-xl object-cover sm:h-[360px] lg:h-[400px]"
-            loading="lazy"
+            className="h-[280px] w-full rounded-xl sm:h-[360px] lg:h-[400px]"
+            imgClassName="h-full w-full object-cover"
           />
         </FadeIn>
       </div>
