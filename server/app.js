@@ -14,14 +14,6 @@ if (!process.env.VERCEL) {
 const app = express();
 app.set("trust proxy", 1);
 
-app.use((req, _res, next) => {
-  const url = req.url || "/";
-  if (!url.startsWith("/api")) {
-    req.url = `/api${url.startsWith("/") ? url : `/${url}`}`;
-  }
-  next();
-});
-
 function isAllowedOrigin(origin) {
   if (!origin) return true;
 
@@ -33,16 +25,12 @@ function isAllowedOrigin(origin) {
   ]);
   if (local.has(origin)) return true;
 
-  if (process.env.CLIENT_ORIGIN && origin === process.env.CLIENT_ORIGIN) {
-    return true;
-  }
-
-  try {
-    const { hostname } = new URL(origin);
-    return hostname.endsWith(".vercel.app");
-  } catch {
-    return false;
-  }
+  const configuredOrigins = [
+    process.env.CLIENT_ORIGIN,
+    process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`,
+  ].filter(Boolean);
+  return configuredOrigins.includes(origin);
 }
 
 app.use(
@@ -64,13 +52,13 @@ app.use(
   }),
 );
 app.use(express.json({ limit: "32kb" }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false, limit: "32kb", parameterLimit: 24 }));
 
 app.get("/api/health", (_req, res) => {
   res.json({
     ok: true,
     supabase: isSupabaseConfigured(),
-    ...getSupabaseStatus(),
+    configured: getSupabaseStatus().configured,
   });
 });
 

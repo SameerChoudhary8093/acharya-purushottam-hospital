@@ -1,3 +1,5 @@
+import { RECRUITMENT_CATEGORIES } from "../../shared/recruitment.js";
+
 export const siteContent = {
   hospital: {
     name: "Acharya Purushottam Hospital & Medical College",
@@ -12,34 +14,34 @@ export const siteContent = {
 
   seo: {
     title: "Acharya Purushottam Hospital & Medical College | Careers",
-    canonical: "https://www.example.com/",
+    canonical: "",
   },
 
   contact: {
-    phone: "+91 XXXXX XXXXX",
-    phoneHref: "tel:+91XXXXXXXXXX",
-    email: "careers@example.com",
-    emailHref: "mailto:careers@example.com",
+    phone: "",
+    phoneHref: "",
+    email: "aphmc@mygyanvihar.com",
+    emailHref: "mailto:aphmc@mygyanvihar.com",
     address:
       "3P9V+96, Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
     addressShort: "Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
     mapsQuery:
       "3P9V+96, Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
     mapsEmbedUrl:
-      "https://maps.google.com/maps?q=3P9V%2B96%2C%20Nangal%20Siras%2C%20Rajawas%2C%20Sikar%20Road%2C%20Jaipur%2C%20Rajasthan%20302048&z=15&output=embed",
+      "https://maps.google.com/maps?q=Rajawas%2C%20Jaipur%2C%20Rajasthan&z=13&output=embed",
     mapsDirectionsUrl:
       "https://www.google.com/maps/dir/?api=1&destination=3P9V%2B96%2C%20Nangal%20Siras%2C%20Rajawas%2C%20Sikar%20Road%2C%20Jaipur%2C%20Rajasthan%20302048",
   },
 
   social: {
-    facebook: "https://www.facebook.com/",
-    linkedin: "https://www.linkedin.com/",
-    instagram: "https://www.instagram.com/",
-    youtube: "https://www.youtube.com/",
+    facebook: "",
+    linkedin: "",
+    instagram: "",
+    youtube: "",
   },
 
   images: {
-    logo: "/images/logo/acharya-purushottam-logo.png",
+    logo: "/images/logo/aphmc-wordmark.png",
     hero: "/images/hospital/hero.jpg",
     exterior: "/images/hospital/exterior.jpg",
     exteriorSide: "/images/hospital/exterior-side.jpg",
@@ -62,7 +64,7 @@ export const siteContent = {
     doctorCare: "/images/hospital/why-doctor-care.jpg",
     surgeons: "/images/hospital/why-doctors-surgery.jpg",
     alts: {
-      hero: "Exterior of Acharya Purushottam Hospital & Medical College with landscaped entrance",
+      hero: "Illustrative hospital exterior with a landscaped entrance",
       exterior: "Main exterior of the hospital and medical college",
       exteriorSide: "Side view of the hospital campus and grounds",
       campusFront: "Hospital entrance, driveway and landscaped campus",
@@ -90,35 +92,14 @@ export const siteContent = {
     label: "Careers at Acharya Purushottam",
     heading: "Build Your Career in the Future of Healthcare",
     headingLines: ["Build Your Career", "in the Future of", "Healthcare"],
-    text: "Be a part of Acharya Purushottam Hospital & Medical College and help us build a new era of healthcare, education and research. Work with expert doctors, nurses, faculty and support teams on a 1,050+ bed teaching campus in Jaipur — where every role helps deliver better care and train the next generation of clinicians.",
-    features: [
-      {
-        title: "1,050+ Beds",
-        text: "Advanced Infrastructure",
-        icon: "bed",
-      },
-      {
-        title: "1.7M+ Sq. Ft. Campus",
-        text: "Spacious & Modern",
-        icon: "campus",
-      },
-      {
-        title: "Expert Doctors",
-        text: "Compassionate Care",
-        icon: "doctors",
-      },
-      {
-        title: "Research Driven",
-        text: "Innovation & Excellence",
-        icon: "research",
-      },
-    ],
+    text: "Gyan Vihar University invites applications from qualified, dedicated and experienced professionals for its upcoming Acharya Purushottam Hospital & Medical College.",
+    features: [{ title: "750 Beds", text: "Upcoming multispecialty hospital", icon: "bed" }],
   },
 
   stats: [
     {
       id: "beds",
-      value: "1,050+",
+      value: "750",
       label: "Beds",
       description: "Multi-specialty teaching hospital",
       icon: "bed",
@@ -200,40 +181,7 @@ export const siteContent = {
     },
   ],
 
-  careerCategories: [
-    {
-      id: "medical",
-      title: "Medical",
-      text: "Doctors, Specialists, Faculty, Residents & more",
-      icon: "stethoscope",
-      image: "/images/hospital/page-hero-doctors.jpg",
-      imageAlt: "Doctors and faculty on the hospital campus",
-    },
-    {
-      id: "nursing",
-      title: "Nursing",
-      text: "Nursing Staff, Supervisors, Faculty & more",
-      icon: "nursing",
-      image: "/images/hospital/svc-nursing.jpg",
-      imageAlt: "Nursing team at a hospital station",
-    },
-    {
-      id: "allied",
-      title: "Allied Healthcare",
-      text: "Therapists, Lab, Radiology, Pharmacy & more",
-      icon: "lab",
-      image: "/images/hospital/svc-lab.jpg",
-      imageAlt: "Allied health professionals in a hospital laboratory",
-    },
-    {
-      id: "admin",
-      title: "Administration & Support",
-      text: "HR, Finance, IT, Operations, Support Services & more",
-      icon: "briefcase",
-      image: "/images/hospital/lobby.jpg",
-      imageAlt: "Hospital lobby and administration environment",
-    },
-  ],
+  careerCategories: RECRUITMENT_CATEGORIES,
 
   departments: [
     "Clinical",
@@ -276,7 +224,7 @@ export const siteContent = {
         id: "beds",
         kind: "stat",
         tone: "navy",
-        title: "1,050+ beds",
+        title: "750 beds",
         text: "A multi-specialty teaching hospital built for scale, training and round-the-clock care.",
       },
       {
@@ -515,7 +463,7 @@ export const siteContent = {
     items: [
       {
         id: "beds-f",
-        title: "1,050+ bed teaching hospital",
+        title: "750 bed teaching hospital",
         text: "Multi-specialty inpatient capacity designed for scale, training and 24×7 care.",
         image: "doctorCare",
       },

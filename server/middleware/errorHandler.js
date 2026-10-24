@@ -1,3 +1,5 @@
+import { MAX_RESUME_MB } from "../../shared/recruitment.js";
+
 export function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     next(err);
@@ -11,8 +13,8 @@ export function errorHandler(err, req, res, next) {
   if (err.code === "LIMIT_FILE_SIZE") {
     res.status(400).json({
       error: "File too large",
-      message: "Resume must be 5 MB or smaller.",
-      fields: { resume: "Resume must be 5 MB or smaller." },
+      message: `Resume must be ${MAX_RESUME_MB} MB or smaller.`,
+      fields: { resume: `Resume must be ${MAX_RESUME_MB} MB or smaller.` },
     });
     return;
   }
@@ -31,6 +33,22 @@ export function errorHandler(err, req, res, next) {
       error: "Invalid fields",
       message: err.message || "Please check the form and try again.",
       fields: err.fields,
+    });
+    return;
+  }
+
+  if (err.code?.startsWith("LIMIT_") || err.type === "entity.too.large") {
+    res.status(400).json({
+      error: "Invalid request",
+      message: "The application contains too much data or an unexpected file. Please check the form.",
+    });
+    return;
+  }
+
+  if (err.status === 400) {
+    res.status(400).json({
+      error: "Invalid request",
+      message: err.type === "entity.parse.failed" ? "Please send valid application data." : "Please check your request and try again.",
     });
     return;
   }

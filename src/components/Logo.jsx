@@ -29,10 +29,10 @@ export default function Logo({ variant = "light", compact = false, showName = tr
     <img
       src={siteContent.images.logo}
       alt=""
-      className={`w-auto shrink-0 object-contain ${
+      className={`shrink-0 object-cover object-center ${
         compact
-          ? "h-10 max-h-10 max-w-[2.75rem] sm:h-11 sm:max-h-11 sm:max-w-12 lg:h-12 lg:max-h-12 lg:max-w-[3.25rem]"
-          : "h-[4.75rem] max-h-[4.75rem] max-w-[5rem] sm:h-20 sm:max-h-20 sm:max-w-[6rem]"
+          ? "h-[2.1rem] w-[11rem] max-w-[54vw] sm:h-9 sm:w-[12.5rem] lg:h-[3rem] lg:w-[17rem]"
+          : "h-[3.5rem] w-[18.5rem] sm:h-16 sm:w-[21rem]"
       }`}
     />
   );

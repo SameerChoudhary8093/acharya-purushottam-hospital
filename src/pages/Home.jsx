@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Hero from "../components/Hero";
-import Highlights from "../components/Highlights";
-import About from "../components/About";
-import WhyJoinUs from "../components/WhyJoinUs";
 import CareerCategories from "../components/CareerCategories";
-import JobListings from "../components/JobListings";
-import CtaBanner from "../components/CtaBanner";
+import Eligibility from "../components/Eligibility";
 import ApplicationForm from "../components/ApplicationForm";
 import LocationContact from "../components/LocationContact";
 import { getJobs } from "../services/api";
@@ -15,7 +11,7 @@ export default function Home() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const loadJobs = useCallback(async () => {
     setLoading(true);
@@ -35,30 +31,23 @@ export default function Home() {
     loadJobs();
   }, [loadJobs]);
 
-  function handleApply(job) {
-    setSelectedJob(job);
+  function handleApply(category) {
+    setSelectedCategory({ ...category });
     scrollToId("apply");
   }
 
   return (
-    <main id="main">
+    <main id="main" className="recruitment-page">
       <Hero />
-      <Highlights />
-      <About />
-      <WhyJoinUs />
-      <CareerCategories />
-      <JobListings
-        jobs={jobs}
-        loading={loading}
-        error={error}
-        onApply={handleApply}
-        onRetry={loadJobs}
-      />
-      <CtaBanner />
+      <CareerCategories onApply={handleApply} />
+      <Eligibility />
       <ApplicationForm
         jobs={jobs}
-        selectedJob={selectedJob}
-        onConsumedSelection={() => setSelectedJob(null)}
+        loading={loading}
+        catalogError={error ? "Department information is temporarily unavailable. You can still complete the application; please retry if submission is unavailable." : ""}
+        onRetry={loadJobs}
+        selectedCategory={selectedCategory}
+        onConsumedSelection={() => setSelectedCategory(null)}
       />
       <LocationContact />
     </main>

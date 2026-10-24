@@ -23,7 +23,12 @@ if (!isVercel && isProduction) {
 }
 
 if (!isVercel) {
-  app.listen(PORT, () => {
+  app.listen(PORT, (error) => {
+    if (error) {
+      console.error(`API could not start (${error.code || "LISTEN_FAILED"}).`);
+      process.exitCode = 1;
+      return;
+    }
     console.log(`API listening on http://localhost:${PORT}`);
     console.log(`Supabase configured: ${isSupabaseConfigured()}`);
   });

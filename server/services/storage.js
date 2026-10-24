@@ -42,7 +42,8 @@ export async function deleteResume(storagePath) {
   if (!storagePath) return;
   try {
     const client = requireSupabase();
-    await client.storage.from(BUCKET).remove([storagePath]);
+    const { error } = await client.storage.from(BUCKET).remove([storagePath]);
+    if (error) console.error("Failed to clean up uploaded resume.");
   } catch (error) {
     console.error("Failed to clean up uploaded resume:", error.message);
   }

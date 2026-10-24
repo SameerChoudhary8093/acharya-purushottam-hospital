@@ -13,7 +13,8 @@ function normalizeSupabaseUrl(raw) {
   try {
     const parsed = new URL(value);
     const host = parsed.hostname.toLowerCase();
-    if (!host.endsWith(".supabase.co") && !host.endsWith(".supabase.in")) {
+    if (parsed.protocol !== "https:" || parsed.username || parsed.password || parsed.port
+      || (!host.endsWith(".supabase.co") && !host.endsWith(".supabase.in"))) {
       return "";
     }
     return `${parsed.protocol}//${host}`;
@@ -61,7 +62,7 @@ function createSupabase() {
     ) {
       headers.delete("Authorization");
     }
-    return fetch(input, { ...init, headers });
+    return fetch(input, { ...init, headers, signal: init?.signal || AbortSignal.timeout(12000) });
   }
 
   return createClient(url, secretKey, {
@@ -84,16 +85,4 @@ export function requireSupabase() {
     throw error;
   }
   return cached;
-}
-
-if (!process.env.VERCEL) {
-  const { configured, rawUrl } = getConfig();
-  console.log("[Supabase Config]");
-  console.log("URL present:", Boolean(rawUrl));
-  console.log("Client will initialize:", configured);
-  if (!configured) {
-    console.warn(
-      "Supabase is not fully configured. SUPABASE_URL should look like https://<project-ref>.supabase.co",
-    );
-  }
 }

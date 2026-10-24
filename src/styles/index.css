@@ -285,3 +285,172 @@ iframe {
   background: radial-gradient(circle, #ffe08a 0%, transparent 70%);
   opacity: 0.45;
 }
+
+/* One form, reordered before the introduction on phones and tablets. */
+.recruitment-page {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.recruitment-page > section {
+  min-width: 0;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+@media (max-width: 1023px) {
+  .recruitment-page > .application-section { order: -1; }
+}
+
+/* Long designations and uploaded filenames must fit narrow screens. */
+.application-section input,
+.application-section select,
+.application-section textarea {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 16px;
+}
+
+.application-section fieldset {
+  min-width: 0;
+}
+
+.application-section label,
+.recruitment-opportunities h3 {
+  overflow-wrap: anywhere;
+}
+
+/* Original white hero: full-width photography blending into the copy. */
+.recruitment-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.recruitment-hero__layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.recruitment-hero__copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 2.25rem 1.25rem 1.5rem;
+}
+
+.recruitment-hero__heading {
+  margin-top: 1rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.recruitment-hero__heading span {
+  display: block;
+}
+
+.recruitment-hero__description {
+  max-width: 42rem;
+}
+
+.recruitment-hero__visual {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.recruitment-hero__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.recruitment-hero__visual::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 3rem;
+  background: linear-gradient(to bottom, #fff, transparent);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .recruitment-hero__copy {
+    padding: 3rem 2rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .recruitment-hero__layout {
+    min-height: max(700px, calc(100svh - var(--header-h)));
+    flex-direction: row;
+  }
+
+  .recruitment-hero__copy {
+    display: flex;
+    width: 48%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem 1.5rem 3.5rem 2rem;
+  }
+
+  .recruitment-hero__heading {
+    font-size: clamp(3rem, 4.3vw, 4.35rem);
+  }
+
+  .recruitment-hero__description {
+    max-width: 42rem;
+    font-size: 0.8125rem;
+  }
+
+  .recruitment-hero__visual {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 52%;
+    aspect-ratio: auto;
+  }
+
+  .recruitment-hero__visual img {
+    object-position: 58% center;
+  }
+
+  .recruitment-hero__visual::before {
+    inset: 0 auto 0 0;
+    width: 10rem;
+    height: auto;
+    background: linear-gradient(to right, #fff, rgb(255 255 255 / 70%) 35%, transparent);
+  }
+}
+
+@media (min-width: 1280px) {
+  .recruitment-hero__layout {
+    min-height: max(740px, calc(100svh - var(--header-h)));
+  }
+
+  .recruitment-hero__copy {
+    width: 54%;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .recruitment-hero__visual {
+    width: 46%;
+  }
+
+  .recruitment-hero__description {
+    font-size: 0.78125rem;
+  }
+
+  .recruitment-hero__visual::before {
+    width: 13rem;
+  }
+}

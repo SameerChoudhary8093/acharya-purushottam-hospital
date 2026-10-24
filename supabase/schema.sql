@@ -30,8 +30,14 @@ create table if not exists public.applications (
   mobile text not null,
   date_of_birth date,
   gender text,
+  hiring_category text not null check (hiring_category in (
+    'Medical Faculty & Clinical Professionals',
+    'Nursing Professionals',
+    'Allied Healthcare Professionals',
+    'Hospital Administration & Support Services'
+  )),
   applying_for text not null,
-  department text not null,
+  department text,
   qualification text not null,
   specialization text,
   total_experience numeric,
@@ -40,6 +46,7 @@ create table if not exists public.applications (
   current_location text,
   expected_salary text,
   notice_period text,
+  confirmed boolean not null check (confirmed = true),
   resume_path text not null,
   status text not null default 'new'
     check (status in ('new', 'under_review', 'shortlisted', 'interview', 'selected', 'rejected')),
@@ -92,10 +99,25 @@ for select
 to anon, authenticated
 using (is_active = true);
 
-insert into storage.buckets (id, name, public)
-values ('resumes', 'resumes', false)
-on conflict (id) do update set public = false;
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('resumes', 'resumes', false, 4194304, array[
+  'application/pdf', 'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+])
+on conflict (id) do update set
+  public = false,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
 
 -- Private bucket: do not add anon/authenticated policies for `resumes`.
 -- No matching policy means candidates cannot list or download files.
 -- The Node.js secret key bypasses RLS for server-side uploads.
+
+-- This restrictive policy also blocks accidental access granted by an older
+-- permissive policy. It affects only the recruitment resume bucket.
+drop policy if exists "Recruitment resumes are server-only" on storage.objects;
+create policy "Recruitment resumes are server-only"
+on storage.objects as restrictive
+for all to anon, authenticated
+using (bucket_id <> 'resumes')
+with check (bucket_id <> 'resumes');

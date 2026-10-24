@@ -1,87 +1,18 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import siteContent from "../config/siteContent";
-import Button from "./Button";
-import FadeIn from "./FadeIn";
-import RevealImage from "./RevealImage";
 
 export default function LocationContact() {
-  const { contact, images } = siteContent;
-
+  const { contact } = siteContent;
   return (
-    <section className="bg-wash py-16 sm:py-24">
-      <div className="mx-auto grid max-w-7xl min-w-0 gap-8 px-4 sm:px-6 xl:grid-cols-3 xl:items-stretch">
-        <FadeIn variant="right" className="h-full">
-          <div id="location" className="scroll-mt-20 h-full rounded-xl bg-white p-6 sm:p-8">
-            <p className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
-              <MapPin size={14} aria-hidden="true" />
-              Our Location
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-body">{contact.address}</p>
-            <div className="mt-5 overflow-hidden rounded-lg">
-              <iframe
-                title="Map showing Acharya Purushottam Hospital & Medical College location"
-                src={contact.mapsEmbedUrl}
-                className="h-44 w-full border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-            <Button
-              as="a"
-              variant="secondary"
-              className="mt-5"
-              href={contact.mapsDirectionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get Directions
-            </Button>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={80} duration={900} className="h-full">
-          <RevealImage
-            src={images.exteriorSide}
-            alt={images.alts.exteriorSide}
-            className="h-64 w-full rounded-xl xl:h-full"
-            imgClassName="h-full w-full object-cover"
-          />
-        </FadeIn>
-
-        <FadeIn variant="left" delay={140} className="h-full">
-          <div id="contact" className="scroll-mt-20 h-full rounded-xl bg-white p-6 sm:p-8">
-            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent">
-              Contact Us
-            </p>
-            <ul className="mt-6 space-y-5 text-sm">
-              <li className="flex gap-3">
-                <Phone className="mt-0.5 shrink-0 text-navy" size={18} aria-hidden="true" />
-                <div>
-                  <p className="font-medium text-muted">Phone</p>
-                  <a className="font-semibold text-navy hover:underline" href={contact.phoneHref}>
-                    {contact.phone}
-                  </a>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <Mail className="mt-0.5 shrink-0 text-navy" size={18} aria-hidden="true" />
-                <div>
-                  <p className="font-medium text-muted">Email</p>
-                  <a className="font-semibold text-navy hover:underline" href={contact.emailHref}>
-                    {contact.email}
-                  </a>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <MapPin className="mt-0.5 shrink-0 text-navy" size={18} aria-hidden="true" />
-                <div>
-                  <p className="font-medium text-muted">Address</p>
-                  <p className="font-semibold text-navy">{contact.addressShort}</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </FadeIn>
+    <section id="contact" className="recruitment-contact border-t border-slate-100 bg-wash py-10 sm:py-12" aria-labelledby="contact-heading">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 md:grid-cols-2 md:gap-12">
+        <div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Contact</p><h2 id="contact-heading" className="mt-3 text-2xl font-bold text-navy">Acharya Purushottam<br className="hidden sm:block" /> Hospital & Medical College</h2><p className="mt-3 text-sm leading-relaxed">To apply for an opportunity, please complete the recruitment application form.</p></div>
+        <div className="space-y-4 text-sm leading-relaxed">
+          {contact.address && <p className="flex items-start gap-3"><MapPin className="mt-0.5 shrink-0 text-accent" size={19} aria-hidden="true" /><span>{contact.address}<a href={contact.mapsDirectionsUrl} className="mt-2 block w-fit font-semibold text-navy underline underline-offset-4" target="_blank" rel="noopener noreferrer">Get directions</a></span></p>}
+          {contact.phone && <p className="flex items-start gap-3"><Phone className="shrink-0 text-accent" size={19} aria-hidden="true" /><a href={contact.phoneHref} className="text-navy hover:underline">{contact.phone}</a></p>}
+          {contact.email && <p className="flex min-w-0 items-start gap-3"><Mail className="shrink-0 text-accent" size={19} aria-hidden="true" /><a href={contact.emailHref} className="break-all text-navy hover:underline">{contact.email}</a></p>}
+          {contact.mapsEmbedUrl && <div className="recruitment-contact-map overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"><iframe src={contact.mapsEmbedUrl} title="Map of Rajawas, Jaipur" className="block h-48 w-full border-0 md:h-52" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /><p className="border-t border-slate-100 px-3 py-2 text-[11px] text-muted">Rajawas, Jaipur · area map</p></div>}
+        </div>
       </div>
     </section>
   );

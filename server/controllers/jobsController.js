@@ -1,4 +1,6 @@
 import { requireSupabase } from "../services/supabase.js";
+import { RECRUITMENT_CATEGORIES, normalizeRecruitmentJob } from "../../shared/recruitment.js";
+import { isUuid } from "../middleware/validation.js";
 
 const JOB_COLUMNS =
   "id,title,department,category,description,qualification,specialization,experience_min,experience_max,location,employment_type,salary_range,created_at";
@@ -22,7 +24,10 @@ export async function listJobs(_req, res, next) {
       throw err;
     }
 
-    res.json({ jobs: data || [] });
+    res.json({
+      jobs: (data || []).map(normalizeRecruitmentJob).filter(Boolean),
+      categories: RECRUITMENT_CATEGORIES,
+    });
   } catch (error) {
     next(error);
   }
@@ -30,6 +35,11 @@ export async function listJobs(_req, res, next) {
 
 export async function getJob(req, res, next) {
   try {
+    if (!isUuid(req.params.id)) {
+      const error = new Error("Invalid position identifier.");
+      error.status = 400;
+      throw error;
+    }
     const supabase = requireSupabase();
     const { data, error } = await supabase
       .from("jobs")
@@ -45,13 +55,14 @@ export async function getJob(req, res, next) {
       throw err;
     }
 
-    if (!data) {
+    const job = normalizeRecruitmentJob(data);
+    if (!job) {
       const err = new Error("This position is no longer available.");
       err.status = 404;
       throw err;
     }
 
-    res.json({ job: data });
+    res.json({ job });
   } catch (error) {
     next(error);
   }
