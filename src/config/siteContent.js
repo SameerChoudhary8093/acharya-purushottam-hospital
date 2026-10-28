@@ -22,15 +22,13 @@ export const siteContent = {
     phoneHref: "",
     email: "aphmc@mygyanvihar.com",
     emailHref: "mailto:aphmc@mygyanvihar.com",
-    address:
-      "3P9V+96, Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
-    addressShort: "Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
-    mapsQuery:
-      "3P9V+96, Nangal Siras, Rajawas, Sikar Road, Jaipur, Rajasthan 302048",
+    address: "Acharya Purushottam Hospital & Medical College, Rajawas, Jaipur, Rajasthan",
+    addressShort: "Rajawas, Jaipur, Rajasthan",
+    mapsQuery: "27.0685441,75.7430479",
     mapsEmbedUrl:
-      "https://maps.google.com/maps?q=Rajawas%2C%20Jaipur%2C%20Rajasthan&z=13&output=embed",
+      "https://maps.google.com/maps?q=27.0685441%2C75.7430479&z=16&output=embed",
     mapsDirectionsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=3P9V%2B96%2C%20Nangal%20Siras%2C%20Rajawas%2C%20Sikar%20Road%2C%20Jaipur%2C%20Rajasthan%20302048",
+      "https://www.google.com/maps/dir/?api=1&destination=27.0685441%2C75.7430479",
   },
 
   social: {
