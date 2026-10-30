@@ -26,9 +26,9 @@ export default function Hero() {
           <p className="recruitment-hero__description hero-copy hero-copy-delay-2 mt-5 text-[15px] leading-relaxed text-body sm:text-base">{hero.text}</p>
           <ul className="recruitment-hero__facts hero-copy hero-copy-delay-3 mt-6 grid grid-cols-2 gap-3">
             {HOSPITAL_INFO.map(({ title, text, Icon }) => (
-              <li key={title} className="min-w-0 rounded-xl border border-slate-100 bg-white px-3 py-3 text-center shadow-[0_4px_18px_rgba(0,45,98,0.05)]">
-                <Icon className="mx-auto text-navy/75" size={17} strokeWidth={1.65} aria-hidden="true" />
-                <p className="mt-2 text-[12px] font-bold leading-snug text-navy sm:text-[13px]">{title}</p>
+              <li key={title} className="min-w-0 rounded-xl border border-slate-100 bg-white px-2.5 py-2.5 text-center shadow-[0_4px_18px_rgba(0,45,98,0.05)]">
+                <Icon className="mx-auto text-navy/75" size={16} strokeWidth={1.65} aria-hidden="true" />
+                <p className="mt-1.5 text-[12px] font-bold leading-snug text-navy sm:text-[13px]">{title}</p>
                 <p className="mt-1 text-[10px] leading-snug text-muted sm:text-[11px]">{text}</p>
               </li>
             ))}
@@ -39,7 +39,7 @@ export default function Hero() {
           </div>
         </div>
         <figure className="recruitment-hero__visual hero-visual-in">
-          <img src={images.hero} alt={images.alts.hero} fetchPriority="high" width="1536" height="1024" />
+          <img src={images.hero} alt={images.alts.hero} fetchPriority="high" width="1672" height="941" />
         </figure>
       </div>
     </section>

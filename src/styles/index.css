@@ -412,15 +412,19 @@ iframe {
     font-size: 0.8125rem;
   }
 
+  .recruitment-hero__facts {
+    max-width: min(42rem, 38vw);
+  }
+
   .recruitment-hero__visual {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 52%;
+    width: 58%;
     aspect-ratio: auto;
   }
 
   .recruitment-hero__visual img {
-    object-position: 58% center;
+    object-position: center;
   }
 
   .recruitment-hero__visual::before {
@@ -443,7 +447,7 @@ iframe {
   }
 
   .recruitment-hero__visual {
-    width: 46%;
+    width: 58%;
   }
 
   .recruitment-hero__description {

@@ -40,7 +40,7 @@ export const siteContent = {
 
   images: {
     logo: "/images/logo/aphmc-wordmark.png",
-    hero: "/images/hospital/hero.jpg",
+    hero: "/images/hospital/aphmc-building-hero.png",
     exterior: "/images/hospital/exterior.jpg",
     exteriorSide: "/images/hospital/exterior-side.jpg",
     campusFront: "/images/hospital/campus-front.jpg",
@@ -62,7 +62,7 @@ export const siteContent = {
     doctorCare: "/images/hospital/why-doctor-care.jpg",
     surgeons: "/images/hospital/why-doctors-surgery.jpg",
     alts: {
-      hero: "Illustrative hospital exterior with a landscaped entrance",
+      hero: "Acharya Purushottam Hospital & Medical College building with a glass facade and landscaped entrance",
       exterior: "Main exterior of the hospital and medical college",
       exteriorSide: "Side view of the hospital campus and grounds",
       campusFront: "Hospital entrance, driveway and landscaped campus",
